@@ -2,10 +2,14 @@
 
 import sqlite3
 import datetime
+import os 
+import tempfile
 
 # ── Database Setup ─────────────────────────────────────────────────────────────
-def init_db():
-    conn = sqlite3.connect("tuition.db")
+DB_PATH = os.path.join(os.path.expanduser("~"), "tuition.db")
+
+def get_conn():
+    return sqlite3.connect(DB_PATH)
     c = conn.cursor()
 
     c.execute("""
@@ -59,8 +63,8 @@ def init_db():
     conn.close()
 
 
-def get_conn():
-    return sqlite3.connect("tuition.db")
+def init_db():
+    conn = sqlite3.connect(DB_PATH)
 
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
